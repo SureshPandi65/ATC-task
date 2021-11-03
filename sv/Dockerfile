@@ -1,0 +1,16 @@
+FROM python:latest
+RUN mkdir /pandi
+WORKDIR /pandi
+ENV ATC_USERNAME='SV'
+ENV ATC_PASSWORD='HCL'
+RUN touch index.html
+RUN echo $ATC_USERNAME >> index.html
+RUN echo $ATC_PASSWORD >> index.html
+
+COPY requirements.txt .
+RUN pip3 install -r requirements.txt
+COPY . .
+RUN rm -rf ss/templates/index.html
+RUN cp index.html ss/templates/
+CMD [ "python3", "manage.py", "runserver", "0.0.0.0:8000" ]
+
