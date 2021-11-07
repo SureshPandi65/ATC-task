@@ -43,26 +43,26 @@ The deployment takes around 20 to 30 minutes with EKS cluster and EKS nodes taki
 1. Navigate to `kubernetes-yamls` directory 
 2. connect to the kubernetes cluster using below aws-cli command
 
-`aws eks --region ap-south-1 update-kubeconfig --name eks-aps1-terraform`
+`aws eks --region ap-west-2 update-kubeconfig --name eks-aps1-terraform`
 
 3. Once successfully connected to the cluster, enter the below commands in the same order.
 `
 kubectl apply -f deployment.yaml
 `
-5. Check whether the pod is running using the following command `kubectl get po -n default`
+4. Check whether the pod is running using the following command `kubectl get po -n default`
 ```
 Sample Output:
 NAME                    READY   STATUS    RESTARTS   AGE
-serviantest-<podhash>   1/1     Running   0          26s
+djangoapp   1/1     Running   0          26s
 ```
 
-6. Once the pod is runnning, enter the following command `kubectl apply -f service.yaml`
-7. Check whether the service was created successfully using the command `kubectl get svc -n default`
+5. Once the pod is runnning, enter the following command `kubectl apply -f service.yaml`
+6. Check whether the service was created successfully using the command `kubectl get svc -n default`
 ```
 Sample Output:
 NAME              TYPE           CLUSTER-IP      EXTERNAL-IP                                          PORT(S)        AGE
 kubernetes        ClusterIP      172.20.0.1      <none>                                               443/TCP        43m
-servian-service   LoadBalancer   172.20.106.60   <bigautomatedhasg>.ap-south-1.elb.amazonaws.com      80:32622/TCP   16s
+djangoservice   LoadBalancer   172.20.106.60   <bigautomatedhasg>.ap-west-2.elb.amazonaws.com      80:32622/TCP   16s
 
 ```
  Wait for 5 minutes and then copy the URL displayed under the `EXTERNAL-IP` and load it in the browser. The home page of the app will load in a second or two.
