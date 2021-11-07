@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+      name: djangoapp
+spec:
+    replicas: 3
+    minReadySeconds: 10
+    selector: 
+        matchLabels:
+            app: djangoapp
+    template:
+      metadata: 
+            labels:
+                    app: djangoapp
+      spec:
+        containers:
+               - image: sureshpandi22/docker-django:atc-djangoapp
+                 name: djangoapp2
+                 ports:
+                         - containerPort: 8000
